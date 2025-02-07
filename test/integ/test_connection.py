@@ -1462,12 +1462,3 @@ def test_disable_telemetry(conn_cnx, caplog):
                 cur.execute("select 1").fetchall()
             assert not conn.telemetry_enabled
     assert "POST /telemetry/send" not in caplog.text
-
-
-@pytest.mark.skipolddriver
-def test_is_valid(conn_cnx):
-    """Tests whether connection and session validation happens."""
-    with conn_cnx() as conn:
-        assert conn
-        assert conn.is_valid() is True
-    assert conn.is_valid() is False

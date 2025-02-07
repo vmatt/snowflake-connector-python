@@ -21,10 +21,6 @@ from .constants import UTF8, kilobyte
 logger = getLogger(__name__)
 
 
-def owner_rw_opener(path, flags) -> int:
-    return os.open(path, flags, mode=0o600)
-
-
 class SnowflakeFileUtil:
     @staticmethod
     def get_digest_and_size(src: IO[bytes]) -> tuple[str, int]:

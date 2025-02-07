@@ -22,7 +22,7 @@ class AuthByOAuth(AuthByPlugin):
         return AuthType.OAUTH
 
     @property
-    def assertion_content(self) -> str | None:
+    def assertion_content(self) -> str:
         """Returns the token."""
         return self._oauth_token
 

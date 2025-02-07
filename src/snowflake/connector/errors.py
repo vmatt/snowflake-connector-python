@@ -12,6 +12,7 @@ import traceback
 from logging import getLogger
 from typing import TYPE_CHECKING, Any
 
+from .compat import BASE_EXCEPTION_CLASS
 from .secret_detector import SecretDetector
 from .telemetry import TelemetryData, TelemetryField
 from .time_util import get_time_millis
@@ -27,7 +28,7 @@ connector_base_path = os.path.join("snowflake", "connector")
 RE_FORMATTED_ERROR = re.compile(r"^(\d{6,})(?: \((\S+)\))?:")
 
 
-class Error(Exception):
+class Error(BASE_EXCEPTION_CLASS):
     """Base Snowflake exception class."""
 
     def __init__(
@@ -360,7 +361,7 @@ class Error(Exception):
         return error_class(error_value)
 
 
-class _Warning(Exception):
+class _Warning(BASE_EXCEPTION_CLASS):
     """Exception for important warnings."""
 
     pass
