@@ -175,31 +175,31 @@ class AuthByWebBrowser(AuthByPlugin):
 
             logger.debug("step 2: open a browser")
             print(f"Going to open: {sso_url} to authenticate...")
-            if not self._webbrowser.open_new(sso_url):
-                print(
-                    "We were unable to open a browser window for you, "
-                    "please open the url above manually then paste the "
-                    "URL you are redirected to into the terminal."
-                )
-                url = input("Enter the URL the SSO URL redirected you to: ")
-                self._process_get_url(url)
-                if not self._token:
-                    # Input contained no token, either URL was incorrectly pasted,
-                    # empty or just wrong
-                    self._handle_failure(
-                        conn=conn,
-                        ret={
-                            "code": ER_UNABLE_TO_OPEN_BROWSER,
-                            "message": (
-                                "Unable to open a browser in this environment and "
-                                "SSO URL contained no token"
-                            ),
-                        },
-                    )
-                    return
-            else:
-                logger.debug("step 3: accept SAML token")
-                self._receive_saml_token(conn, socket_connection)
+            # if not self._webbrowser.open_new(sso_url):
+            #     print(
+            #         "We were unable to open a browser window for you, "
+            #         "please open the url above manually then paste the "
+            #         "URL you are redirected to into the terminal."
+            #     )
+            #     url = input("Enter the URL the SSO URL redirected you to: ")
+            #     self._process_get_url(url)
+            #     if not self._token:
+            #         # Input contained no token, either URL was incorrectly pasted,
+            #         # empty or just wrong
+            #         self._handle_failure(
+            #             conn=conn,
+            #             ret={
+            #                 "code": ER_UNABLE_TO_OPEN_BROWSER,
+            #                 "message": (
+            #                     "Unable to open a browser in this environment and "
+            #                     "SSO URL contained no token"
+            #                 ),
+            #             },
+            #         )
+            #         return
+            # else:
+            logger.debug("step 3: accept SAML token")
+            self._receive_saml_token(conn, socket_connection)
         finally:
             socket_connection.close()
 
